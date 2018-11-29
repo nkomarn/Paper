@@ -1,4 +1,4 @@
-From 4c1cbaf5edb5f969dcec1686549b9a70395fac77 Mon Sep 17 00:00:00 2001
+From 3bdfef7c20a6506b0a133f7de68973203f1612ba Mon Sep 17 00:00:00 2001
 From: Aikar <aikar@aikar.co>
 Date: Mon, 29 Feb 2016 18:48:17 -0600
 Subject: [PATCH] Timings v2
@@ -2982,10 +2982,10 @@ index 000000000..df592d855
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index d6cdbdd80..242c6fba7 100644
+index 2ce174401..7fdd1a084 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -567,7 +567,6 @@ public final class Bukkit {
+@@ -568,7 +568,6 @@ public final class Bukkit {
       */
      public static void reload() {
          server.reload();
@@ -2994,10 +2994,10 @@ index d6cdbdd80..242c6fba7 100644
  
      /**
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index da4ced2d6..33934411d 100644
+index 63392d5e7..0e7a81c88 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -1083,12 +1083,27 @@ public interface Server extends PluginMessageRecipient {
+@@ -1150,12 +1150,27 @@ public interface Server extends PluginMessageRecipient {
      // Spigot start
      public class Spigot
      {
@@ -3507,10 +3507,10 @@ index bba914d7f..000000000
 -    // Spigot end
 -}
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index bff56f488..fc9a32ce7 100644
+index 5054276ff..0993f31b1 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -1591,6 +1591,11 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
+@@ -1575,6 +1575,11 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
          public void sendMessage(net.md_5.bungee.api.ChatMessageType position, net.md_5.bungee.api.chat.BaseComponent... components) {
              throw new UnsupportedOperationException("Not supported yet.");
          }

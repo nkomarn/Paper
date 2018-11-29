@@ -1,4 +1,4 @@
-From 5e82f4f46a56b6fe2e0d835e64fc2161eb6881ae Mon Sep 17 00:00:00 2001
+From d8ea5a96611dca8752408160df05409db6832b22 Mon Sep 17 00:00:00 2001
 From: Phoenix616 <mail@moep.tv>
 Date: Tue, 21 Aug 2018 01:39:35 +0100
 Subject: [PATCH] Improve death events
@@ -55,10 +55,10 @@ index 665c85ca4..8abd71dfc 100644
          return SoundCategory.NEUTRAL;
      }
 diff --git a/src/main/java/net/minecraft/server/EntityArmorStand.java b/src/main/java/net/minecraft/server/EntityArmorStand.java
-index d8939420c..3a77a112f 100644
+index 8167fe5c9..36e2c2e15 100644
 --- a/src/main/java/net/minecraft/server/EntityArmorStand.java
 +++ b/src/main/java/net/minecraft/server/EntityArmorStand.java
-@@ -656,7 +656,8 @@ public class EntityArmorStand extends EntityLiving {
+@@ -662,7 +662,8 @@ public class EntityArmorStand extends EntityLiving {
      }
  
      public void killEntity() {
@@ -306,10 +306,10 @@ index 8be0a47ba..f56ef6f71 100644
  
      public void injectScaledMaxHealth(Collection<AttributeInstance> collection, boolean force) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index 396a37f69..11ff21fcf 100644
+index e592dfb44..c70890cc5 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-@@ -485,9 +485,16 @@ public class CraftEventFactory {
+@@ -495,9 +495,16 @@ public class CraftEventFactory {
      public static EntityDeathEvent callEntityDeathEvent(EntityLiving victim, List<org.bukkit.inventory.ItemStack> drops) {
          CraftLivingEntity entity = (CraftLivingEntity) victim.getBukkitEntity();
          EntityDeathEvent event = new EntityDeathEvent(entity, drops, victim.getExpReward());
@@ -326,7 +326,7 @@ index 396a37f69..11ff21fcf 100644
          victim.expToDrop = event.getDroppedExp();
  
          for (org.bukkit.inventory.ItemStack stack : event.getDrops()) {
-@@ -503,8 +510,15 @@ public class CraftEventFactory {
+@@ -513,8 +520,15 @@ public class CraftEventFactory {
          CraftPlayer entity = victim.getBukkitEntity();
          PlayerDeathEvent event = new PlayerDeathEvent(entity, drops, victim.getExpReward(), 0, deathMessage);
          event.setKeepInventory(keepInventory);
@@ -342,7 +342,7 @@ index 396a37f69..11ff21fcf 100644
  
          victim.keepLevel = event.getKeepLevel();
          victim.newLevel = event.getNewLevel();
-@@ -525,6 +539,31 @@ public class CraftEventFactory {
+@@ -535,6 +549,31 @@ public class CraftEventFactory {
          return event;
      }
  

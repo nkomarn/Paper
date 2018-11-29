@@ -1,4 +1,4 @@
-From 38f055fc91d837187231311389f933b0c48b0fed Mon Sep 17 00:00:00 2001
+From 4263686098d71b1b539cb79fc04f04d0994c21c5 Mon Sep 17 00:00:00 2001
 From: Zach Brown <zach.brown@destroystokyo.com>
 Date: Sat, 10 Jun 2017 16:59:40 -0500
 Subject: [PATCH] Fix upstream javadoc warnings and errors
@@ -140,10 +140,10 @@ index cfce8fa57..8660070bb 100644
       */
      @Deprecated
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index 4b0caae51..45690a2fa 100644
+index d10e3f99d..49de086e3 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -445,7 +445,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
+@@ -431,7 +431,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
       *
       * Use supplied alternative character to the section symbol to represent legacy color codes.
       *
@@ -152,7 +152,7 @@ index 4b0caae51..45690a2fa 100644
       * @param message The message to send
       */
      public void sendActionBar(char alternateChar, String message);
-@@ -512,6 +512,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
+@@ -498,6 +498,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
      /**
       * Update the subtitle of titles displayed to the player
       *
@@ -160,7 +160,7 @@ index 4b0caae51..45690a2fa 100644
       * @deprecated Use {@link #updateTitle(Title)}
       */
      @Deprecated
-@@ -520,6 +521,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
+@@ -506,6 +507,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
      /**
       * Update the subtitle of titles displayed to the player
       *
@@ -168,7 +168,7 @@ index 4b0caae51..45690a2fa 100644
       * @deprecated Use {@link #updateTitle(Title)}
       */
      @Deprecated
-@@ -528,6 +530,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
+@@ -514,6 +516,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
      /**
       * Show the given title to the player, along with the last subtitle set, using the last set times
       *
@@ -176,7 +176,7 @@ index 4b0caae51..45690a2fa 100644
       * @deprecated Use {@link #sendTitle(Title)} or {@link #updateTitle(Title)}
       */
      @Deprecated
-@@ -536,6 +539,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
+@@ -522,6 +525,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
      /**
       * Show the given title to the player, along with the last subtitle set, using the last set times
       *
@@ -184,7 +184,7 @@ index 4b0caae51..45690a2fa 100644
       * @deprecated Use {@link #sendTitle(Title)} or {@link #updateTitle(Title)}
       */
      @Deprecated
-@@ -1456,6 +1460,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
+@@ -1442,6 +1446,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
       * @param count the number of particles
       * @param data the data to use for the particle or null,
       *             the type of this depends on {@link Particle#getDataType()}
@@ -192,7 +192,7 @@ index 4b0caae51..45690a2fa 100644
       */
      public <T> void spawnParticle(Particle particle, Location location, int count, T data);
  
-@@ -1471,6 +1476,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
+@@ -1457,6 +1462,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
       * @param count the number of particles
       * @param data the data to use for the particle or null,
       *             the type of this depends on {@link Particle#getDataType()}
@@ -200,7 +200,7 @@ index 4b0caae51..45690a2fa 100644
       */
      public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, T data);
  
-@@ -1520,6 +1526,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
+@@ -1506,6 +1512,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
       * @param offsetZ the maximum random offset on the Z axis
       * @param data the data to use for the particle or null,
       *             the type of this depends on {@link Particle#getDataType()}
@@ -208,7 +208,7 @@ index 4b0caae51..45690a2fa 100644
       */
      public <T> void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY, double offsetZ, T data);
  
-@@ -1539,6 +1546,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
+@@ -1525,6 +1532,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
       * @param offsetZ the maximum random offset on the Z axis
       * @param data the data to use for the particle or null,
       *             the type of this depends on {@link Particle#getDataType()}
@@ -216,7 +216,7 @@ index 4b0caae51..45690a2fa 100644
       */
      public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, T data);
  
-@@ -1594,6 +1602,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
+@@ -1580,6 +1588,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
       *              particle used (normally speed)
       * @param data the data to use for the particle or null,
       *             the type of this depends on {@link Particle#getDataType()}
@@ -224,7 +224,7 @@ index 4b0caae51..45690a2fa 100644
       */
      public <T> void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY, double offsetZ, double extra, T data);
  
-@@ -1615,6 +1624,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
+@@ -1601,6 +1610,7 @@ public interface Player extends HumanEntity, Conversable, OfflinePlayer, PluginM
       *              particle used (normally speed)
       * @param data the data to use for the particle or null,
       *             the type of this depends on {@link Particle#getDataType()}
@@ -266,10 +266,10 @@ index cf53ea22f..629233796 100644
       */
      @Deprecated
 diff --git a/src/main/java/org/bukkit/event/player/PlayerLoginEvent.java b/src/main/java/org/bukkit/event/player/PlayerLoginEvent.java
-index de4fb37f3..f1de2af6e 100644
+index 6532c24fe..ee0b12736 100644
 --- a/src/main/java/org/bukkit/event/player/PlayerLoginEvent.java
 +++ b/src/main/java/org/bukkit/event/player/PlayerLoginEvent.java
-@@ -24,6 +24,7 @@ public class PlayerLoginEvent extends PlayerEvent {
+@@ -28,6 +28,7 @@ public class PlayerLoginEvent extends PlayerEvent {
       * @param hostname The hostname that was used to connect to the server
       * @param address The address the player used to connect, provided for
       *     timing issues
@@ -277,7 +277,7 @@ index de4fb37f3..f1de2af6e 100644
       */
      public PlayerLoginEvent(final Player player, final String hostname, final InetAddress address, final InetAddress realAddress) { // Spigot
          super(player);
-@@ -47,6 +48,7 @@ public class PlayerLoginEvent extends PlayerEvent {
+@@ -51,6 +52,7 @@ public class PlayerLoginEvent extends PlayerEvent {
       *     timing issues
       * @param result The result status for this event
       * @param message The message to be displayed if result denies login
