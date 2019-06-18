@@ -1,14 +1,14 @@
-From 565b1a1d7031594461aa7fac5a6a63eb1ff7f803 Mon Sep 17 00:00:00 2001
+From 088a4d4d3a4b77cb4b258bb325ea4bb92cb5b2fc Mon Sep 17 00:00:00 2001
 From: BillyGalbreath <Blake.Galbreath@GMail.com>
 Date: Sun, 7 Oct 2018 04:29:51 -0500
 Subject: [PATCH] Add more Zombie API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Zombie.java b/src/main/java/org/bukkit/entity/Zombie.java
-index 48034198..615dd990 100644
+index ee2e70c6..74d6529a 100644
 --- a/src/main/java/org/bukkit/entity/Zombie.java
 +++ b/src/main/java/org/bukkit/entity/Zombie.java
-@@ -79,4 +79,55 @@ public interface Zombie extends Monster {
+@@ -86,4 +86,55 @@ public interface Zombie extends Monster {
       * @param time new conversion time
       */
      void setConversionTime(int time);
@@ -65,5 +65,5 @@ index 48034198..615dd990 100644
 +    // Paper end
  }
 -- 
-2.20.1
+2.17.1
 

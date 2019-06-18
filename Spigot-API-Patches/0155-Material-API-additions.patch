@@ -1,14 +1,14 @@
-From 9f8161e612c20011aefaab900ee328d011344ce7 Mon Sep 17 00:00:00 2001
+From fece5a49e0c86a1c0cb750f7aacdae6c919b319d Mon Sep 17 00:00:00 2001
 From: Aikar <aikar@aikar.co>
 Date: Sat, 6 Oct 2018 21:14:29 -0400
 Subject: [PATCH] Material API additions
 
 
 diff --git a/src/main/java/org/bukkit/Material.java b/src/main/java/org/bukkit/Material.java
-index 14cae61f..39302434 100644
+index 6120955b..c628a934 100644
 --- a/src/main/java/org/bukkit/Material.java
 +++ b/src/main/java/org/bukkit/Material.java
-@@ -72,6 +72,7 @@ import org.bukkit.material.MaterialData;
+@@ -74,6 +74,7 @@ import org.jetbrains.annotations.Nullable;
  /**
   * An enum of all material IDs accepted by the official server and client
   */
@@ -16,7 +16,7 @@ index 14cae61f..39302434 100644
  public enum Material implements Keyed {
      //<editor-fold desc="Materials" defaultstate="collapsed">
      ACACIA_BOAT(27326, 1),
-@@ -2984,6 +2985,22 @@ public enum Material implements Keyed {
+@@ -2986,6 +2987,22 @@ public enum Material implements Keyed {
          }
      }
  
@@ -40,5 +40,5 @@ index 14cae61f..39302434 100644
       * Do not use for any reason.
       *
 -- 
-2.20.1
+2.17.1
 

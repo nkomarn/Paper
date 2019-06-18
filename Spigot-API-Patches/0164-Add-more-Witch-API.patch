@@ -1,20 +1,20 @@
-From 3df85d0e4c57460cf7644e4acd0a42ce53bd05f6 Mon Sep 17 00:00:00 2001
+From 21d9b029cdd5e1dd73ff4ece26a7341d82fa58fd Mon Sep 17 00:00:00 2001
 From: BillyGalbreath <Blake.Galbreath@GMail.com>
 Date: Fri, 12 Oct 2018 03:47:26 -0500
 Subject: [PATCH] Add more Witch API
 
 
 diff --git a/src/main/java/org/bukkit/entity/Witch.java b/src/main/java/org/bukkit/entity/Witch.java
-index 4b27f689..64ec8409 100644
+index 4b27f689..1828b2ce 100644
 --- a/src/main/java/org/bukkit/entity/Witch.java
 +++ b/src/main/java/org/bukkit/entity/Witch.java
-@@ -2,8 +2,42 @@ package org.bukkit.entity;
+@@ -2,8 +2,43 @@ package org.bukkit.entity;
  
  import com.destroystokyo.paper.entity.RangedEntity;
  
 +// Paper start
 +import org.bukkit.inventory.ItemStack;
-+import javax.annotation.Nullable;
++import org.jetbrains.annotations.Nullable;
 +// Paper end
 +
  /**
@@ -42,6 +42,7 @@ index 4b27f689..64ec8409 100644
 +     *
 +     * @return The potion the witch is drinking
 +     */
++    @Nullable
 +    ItemStack getDrinkingPotion();
 +
 +    /**
@@ -53,5 +54,5 @@ index 4b27f689..64ec8409 100644
 +    // Paper end
  }
 -- 
-2.20.1
+2.17.1
 

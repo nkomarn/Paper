@@ -1,14 +1,14 @@
-From 437e17e4c522a9e7f87441f3b44efc36166f8b53 Mon Sep 17 00:00:00 2001
+From 85faf4182bc480db78d548ee3fc732cfa3262cdb Mon Sep 17 00:00:00 2001
 From: Aikar <aikar@aikar.co>
 Date: Wed, 15 Aug 2018 01:19:37 -0400
 Subject: [PATCH] Don't use snapshots for Timings Tile Entity reports
 
 
 diff --git a/src/main/java/co/aikar/timings/TimingHistory.java b/src/main/java/co/aikar/timings/TimingHistory.java
-index 28d0954a..7ad9400a 100644
+index 043695239..99815866b 100644
 --- a/src/main/java/co/aikar/timings/TimingHistory.java
 +++ b/src/main/java/co/aikar/timings/TimingHistory.java
-@@ -118,7 +118,7 @@ public class TimingHistory {
+@@ -119,7 +119,7 @@ public class TimingHistory {
                          data.entityCounts.get(entity.getType()).increment();
                      }
  
@@ -18,5 +18,5 @@ index 28d0954a..7ad9400a 100644
                              Bukkit.getLogger().warning("Null tileentity detected in chunk at position x: " + chunk.getX() + ", z: " + chunk.getZ());
                              continue;
 -- 
-2.20.1
+2.21.0
 

@@ -1,4 +1,4 @@
-From e9a7436242095e39bf7c216ead3291c98cb26689 Mon Sep 17 00:00:00 2001
+From 743d95053dad6291fa08b2cd3a8e35d32bf0eb14 Mon Sep 17 00:00:00 2001
 From: Aikar <aikar@aikar.co>
 Date: Sat, 18 Jun 2016 23:22:12 -0400
 Subject: [PATCH] Delay Chunk Unloads based on Player Movement
@@ -20,10 +20,10 @@ This also makes the Chunk GC System useless, by auto scheduling unload as soon a
 a spare chunk is added to the server thats outside of view distance.
 
 diff --git a/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java b/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
-index 42d951554..d8f258105 100644
+index bcc2ecaa3..c70771614 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
-@@ -301,4 +301,18 @@ public class PaperWorldConfig {
+@@ -310,4 +310,18 @@ public class PaperWorldConfig {
          preventTntFromMovingInWater = getBoolean("prevent-tnt-from-moving-in-water", false);
          log("Prevent TNT from moving in water: " + preventTntFromMovingInWater);
      }
@@ -43,7 +43,7 @@ index 42d951554..d8f258105 100644
 +    }
  }
 diff --git a/src/main/java/net/minecraft/server/Chunk.java b/src/main/java/net/minecraft/server/Chunk.java
-index 0421f8f95..ddccdc939 100644
+index c74176daa..bdf922db5 100644
 --- a/src/main/java/net/minecraft/server/Chunk.java
 +++ b/src/main/java/net/minecraft/server/Chunk.java
 @@ -40,6 +40,7 @@ public class Chunk implements IChunkAccess {
@@ -172,10 +172,10 @@ index 206457650..ab4f3b722 100644
  
      }
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index b51415e9b..1ffa3f0aa 100644
+index 636d8b820..2aa252fef 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
-@@ -1287,7 +1287,13 @@ public abstract class World implements IEntityAccess, GeneratorAccess, IIBlockAc
+@@ -1292,7 +1292,13 @@ public abstract class World implements IEntityAccess, GeneratorAccess, IIBlockAc
              if (!tileentity.x() && tileentity.hasWorld()) {
                  BlockPosition blockposition = tileentity.getPosition();
  
@@ -191,7 +191,7 @@ index b51415e9b..1ffa3f0aa 100644
                          this.methodProfiler.a(() -> {
                              return String.valueOf(TileEntityTypes.a(tileentity.C()));
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index 274e8626d..cecdc5388 100644
+index a8c7e7931..f7883e708 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 @@ -1772,7 +1772,7 @@ public class CraftWorld implements World {
@@ -220,5 +220,5 @@ index d08ef3fe1..081789a8f 100644
      }
  }
 -- 
-2.20.1
+2.21.0
 

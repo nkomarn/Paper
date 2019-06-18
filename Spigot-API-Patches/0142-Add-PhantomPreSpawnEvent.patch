@@ -1,4 +1,4 @@
-From f5a1ce4f2c76ea0c0e04db4c4f8e292923864147 Mon Sep 17 00:00:00 2001
+From c2f4f4916892115c29f047a6f294c0103d83cdaa Mon Sep 17 00:00:00 2001
 From: BillyGalbreath <Blake.Galbreath@GMail.com>
 Date: Sat, 25 Aug 2018 19:56:42 -0500
 Subject: [PATCH] Add PhantomPreSpawnEvent
@@ -6,26 +6,27 @@ Subject: [PATCH] Add PhantomPreSpawnEvent
 
 diff --git a/src/main/java/com/destroystokyo/paper/event/entity/PhantomPreSpawnEvent.java b/src/main/java/com/destroystokyo/paper/event/entity/PhantomPreSpawnEvent.java
 new file mode 100644
-index 00000000..303a1ec9
+index 000000000..9022f697a
 --- /dev/null
 +++ b/src/main/java/com/destroystokyo/paper/event/entity/PhantomPreSpawnEvent.java
-@@ -0,0 +1,30 @@
+@@ -0,0 +1,31 @@
 +package com.destroystokyo.paper.event.entity;
 +
 +import org.bukkit.Location;
 +import org.bukkit.entity.Entity;
 +import org.bukkit.entity.EntityType;
 +import org.bukkit.event.entity.CreatureSpawnEvent;
++import org.jetbrains.annotations.NotNull;
++import org.jetbrains.annotations.Nullable;
 +
-+import javax.annotation.Nullable;
 +
 +/**
 + * Called when a phantom is spawned for an exhausted player
 + */
 +public class PhantomPreSpawnEvent extends PreCreatureSpawnEvent {
-+    private final Entity entity;
++    @NotNull private final Entity entity;
 +
-+    public PhantomPreSpawnEvent(Location location, Entity entity, CreatureSpawnEvent.SpawnReason reason) {
++    public PhantomPreSpawnEvent(@NotNull Location location, @NotNull Entity entity, @NotNull CreatureSpawnEvent.SpawnReason reason) {
 +        super(location, EntityType.PHANTOM, reason);
 +        this.entity = entity;
 +    }
@@ -41,10 +42,19 @@ index 00000000..303a1ec9
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/entity/Phantom.java b/src/main/java/org/bukkit/entity/Phantom.java
-index 1a1044ed..65b703a2 100644
+index 1a1044edc..ed4d417c2 100644
 --- a/src/main/java/org/bukkit/entity/Phantom.java
 +++ b/src/main/java/org/bukkit/entity/Phantom.java
-@@ -14,4 +14,13 @@ public interface Phantom extends Flying {
+@@ -1,5 +1,8 @@
+ package org.bukkit.entity;
+ 
++import org.jetbrains.annotations.NotNull;
++import org.jetbrains.annotations.Nullable;
++
+ /**
+  * Represents a phantom.
+  */
+@@ -14,4 +17,14 @@ public interface Phantom extends Flying {
       * @param sz The new size of the phantom.
       */
      public void setSize(int sz);
@@ -55,9 +65,10 @@ index 1a1044ed..65b703a2 100644
 +     *
 +     * @return UUID
 +     */
++    @Nullable
 +    public java.util.UUID getSpawningEntity();
 +    // Paper end
  }
 -- 
-2.20.1
+2.21.0
 

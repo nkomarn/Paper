@@ -1,4 +1,4 @@
-From f09172180ea930533e2dfb629a6cd104ba613df4 Mon Sep 17 00:00:00 2001
+From 5a2e30487b3a170f81c18af60314b49c0767fdfe Mon Sep 17 00:00:00 2001
 From: Shane Freeder <theboyetronic@gmail.com>
 Date: Sun, 18 Nov 2018 15:53:43 +0000
 Subject: [PATCH] Support cancellation supression of EntityDismount/VehicleExit
@@ -21,30 +21,30 @@ this is going to be the best soultion all around.
 Improvements/suggestions welcome!
 
 diff --git a/src/main/java/org/bukkit/event/vehicle/VehicleExitEvent.java b/src/main/java/org/bukkit/event/vehicle/VehicleExitEvent.java
-index 364451b5..b3269db2 100644
+index 69c9e499..f0c0bae5 100644
 --- a/src/main/java/org/bukkit/event/vehicle/VehicleExitEvent.java
 +++ b/src/main/java/org/bukkit/event/vehicle/VehicleExitEvent.java
-@@ -12,10 +12,18 @@ public class VehicleExitEvent extends VehicleEvent implements Cancellable {
+@@ -13,10 +13,18 @@ public class VehicleExitEvent extends VehicleEvent implements Cancellable {
      private static final HandlerList handlers = new HandlerList();
      private boolean cancelled;
      private final LivingEntity exited;
 +    private final boolean isCancellable; // Paper
  
--    public VehicleExitEvent(final Vehicle vehicle, final LivingEntity exited) {
-+    public VehicleExitEvent(Vehicle vehicle, LivingEntity exited, boolean isCancellable) { // Paper
+-    public VehicleExitEvent(@NotNull final Vehicle vehicle, @NotNull final LivingEntity exited) {
++    public VehicleExitEvent(@NotNull final Vehicle vehicle, @NotNull final LivingEntity exited, boolean isCancellable) { // Paper
          super(vehicle);
          this.exited = exited;
 +        // Paper start
 +        this.isCancellable = isCancellable;
 +    }
 +
-+    public VehicleExitEvent(final Vehicle vehicle, final LivingEntity exited) {
++    public VehicleExitEvent(@NotNull final Vehicle vehicle, @NotNull final LivingEntity exited) {
 +        this(vehicle, exited, true);
 +        // Paper end
      }
  
      /**
-@@ -32,9 +40,18 @@ public class VehicleExitEvent extends VehicleEvent implements Cancellable {
+@@ -34,9 +42,18 @@ public class VehicleExitEvent extends VehicleEvent implements Cancellable {
      }
  
      public void setCancelled(boolean cancel) {
@@ -60,26 +60,26 @@ index 364451b5..b3269db2 100644
 +        // paper end
 +    }
 +
+     @NotNull
      @Override
      public HandlerList getHandlers() {
-         return handlers;
 diff --git a/src/main/java/org/spigotmc/event/entity/EntityDismountEvent.java b/src/main/java/org/spigotmc/event/entity/EntityDismountEvent.java
-index 4110d3bb..555899ef 100644
+index a473b2c6..a5b4aed5 100644
 --- a/src/main/java/org/spigotmc/event/entity/EntityDismountEvent.java
 +++ b/src/main/java/org/spigotmc/event/entity/EntityDismountEvent.java
-@@ -15,11 +15,20 @@ public class EntityDismountEvent extends EntityEvent implements Cancellable
+@@ -16,11 +16,20 @@ public class EntityDismountEvent extends EntityEvent implements Cancellable
      private static final HandlerList handlers = new HandlerList();
      private boolean cancelled;
      private final Entity dismounted;
 +    private final boolean isCancellable; // Paper
  
-     public EntityDismountEvent(Entity what, Entity dismounted)
+     public EntityDismountEvent(@NotNull Entity what, @NotNull Entity dismounted)
      {
 +        // Paper start
 +        this(what, dismounted, true);
 +    }
 +
-+    public EntityDismountEvent(Entity what, Entity dismounted, boolean isCancellable)
++    public EntityDismountEvent(@NotNull Entity what, @NotNull Entity dismounted, boolean isCancellable)
 +    {
 +        // Paper end
          super( what );
@@ -87,8 +87,8 @@ index 4110d3bb..555899ef 100644
 +        this.isCancellable = isCancellable; // Paper
      }
  
-     public Entity getDismounted()
-@@ -36,9 +45,18 @@ public class EntityDismountEvent extends EntityEvent implements Cancellable
+     @NotNull
+@@ -38,9 +47,18 @@ public class EntityDismountEvent extends EntityEvent implements Cancellable
      @Override
      public void setCancelled(boolean cancel)
      {
@@ -104,9 +104,9 @@ index 4110d3bb..555899ef 100644
 +        // Paper end
 +    }
 +
+     @NotNull
      @Override
      public HandlerList getHandlers()
-     {
 -- 
-2.20.1
+2.17.1
 

@@ -1,11 +1,11 @@
-From fcc79c8edbb43bcd014c6d87d2b2edd1460744f3 Mon Sep 17 00:00:00 2001
+From ea910af0ba9f49a09f896d853da4893c29bdd0a5 Mon Sep 17 00:00:00 2001
 From: Byteflux <byte@byteflux.net>
 Date: Tue, 1 Mar 2016 23:45:08 -0600
 Subject: [PATCH] Entity Origin API
 
 
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index 4baf5750e..ca5212f20 100644
+index 6150eb1fc..bff44d535 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -160,6 +160,7 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
@@ -16,7 +16,7 @@ index 4baf5750e..ca5212f20 100644
      // Spigot start
      public final byte activationType = org.spigotmc.ActivationRange.initializeEntityActivationType(this);
      public final boolean defaultActivationState;
-@@ -1604,6 +1605,11 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
+@@ -1620,6 +1621,11 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
                  }
              }
  
@@ -28,7 +28,7 @@ index 4baf5750e..ca5212f20 100644
              return nbttagcompound;
          } catch (Throwable throwable) {
              CrashReport crashreport = CrashReport.a(throwable, "Saving entity NBT");
-@@ -1745,6 +1751,13 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
+@@ -1761,6 +1767,13 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
              }
              // CraftBukkit end
  
@@ -42,7 +42,7 @@ index 4baf5750e..ca5212f20 100644
          } catch (Throwable throwable) {
              CrashReport crashreport = CrashReport.a(throwable, "Loading entity NBT");
              CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Entity being loaded");
-@@ -1820,6 +1833,7 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
+@@ -1836,6 +1849,7 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
  
      protected abstract void b(NBTTagCompound nbttagcompound);
  
@@ -70,10 +70,10 @@ index a6eae266d..489dd861d 100644
  
      public void a(boolean flag) {
 diff --git a/src/main/java/net/minecraft/server/EntityTNTPrimed.java b/src/main/java/net/minecraft/server/EntityTNTPrimed.java
-index 5dc52b6b8..2c28633c4 100644
+index 8c19278f3..7f4b68dcc 100644
 --- a/src/main/java/net/minecraft/server/EntityTNTPrimed.java
 +++ b/src/main/java/net/minecraft/server/EntityTNTPrimed.java
-@@ -109,6 +109,14 @@ public class EntityTNTPrimed extends Entity {
+@@ -108,6 +108,14 @@ public class EntityTNTPrimed extends Entity {
  
      protected void a(NBTTagCompound nbttagcompound) {
          this.setFuseTicks(nbttagcompound.getShort("Fuse"));
@@ -101,10 +101,10 @@ index 27debcfca..22027321b 100644
          if (i >= 0 && i < this.list.size()) {
              NBTBase nbtbase = (NBTBase) this.list.get(i);
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index dab1be9b6..59b1f9043 100644
+index 106ad00dc..470f40622 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
-@@ -913,6 +913,12 @@ public abstract class World implements IEntityAccess, GeneratorAccess, IIBlockAc
+@@ -918,6 +918,12 @@ public abstract class World implements IEntityAccess, GeneratorAccess, IIBlockAc
          int j = MathHelper.floor(entity.locZ / 16.0D);
          boolean flag = entity.attachedToPlayer;
  
@@ -118,10 +118,10 @@ index dab1be9b6..59b1f9043 100644
              flag = true;
          }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index 153efb9b9..df7c77e9a 100644
+index 7edbbb106..660e59ba1 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-@@ -802,4 +802,12 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
+@@ -816,4 +816,12 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
          return spigot;
      }
      // Spigot end
@@ -135,5 +135,5 @@ index 153efb9b9..df7c77e9a 100644
 +    // Paper end
  }
 -- 
-2.20.1
+2.21.0
 

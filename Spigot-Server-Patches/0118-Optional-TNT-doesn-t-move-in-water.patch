@@ -1,11 +1,11 @@
-From 7fb2a84b0018e12e30e3700bdaaa688f9bed0c33 Mon Sep 17 00:00:00 2001
+From 8c6bf6b19ba3fbbe21a1d98cec46c93bb9ca8f0d Mon Sep 17 00:00:00 2001
 From: Zach Brown <zach.brown@destroystokyo.com>
 Date: Sun, 22 May 2016 20:20:55 -0500
 Subject: [PATCH] Optional TNT doesn't move in water
 
 
 diff --git a/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java b/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
-index 00f0451ef..42d951554 100644
+index 720b87a5e..bcc2ecaa3 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
 @@ -2,7 +2,6 @@ package com.destroystokyo.paper;
@@ -16,7 +16,7 @@ index 00f0451ef..42d951554 100644
  import org.bukkit.configuration.file.YamlConfiguration;
  import org.spigotmc.SpigotWorldConfig;
  
-@@ -292,4 +291,14 @@ public class PaperWorldConfig {
+@@ -301,4 +300,14 @@ public class PaperWorldConfig {
              );
          }
      }
@@ -32,10 +32,10 @@ index 00f0451ef..42d951554 100644
 +    }
  }
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index 192f0aedd..0004c134a 100644
+index 3e292c231..31c53552f 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
-@@ -1171,6 +1171,12 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
+@@ -1190,6 +1190,12 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
      }
  
      public boolean aq() {
@@ -48,7 +48,7 @@ index 192f0aedd..0004c134a 100644
          return this.isInWater() || this.q();
      }
  
-@@ -2722,6 +2728,11 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
+@@ -2741,6 +2747,11 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
      }
  
      public boolean bw() {
@@ -61,10 +61,10 @@ index 192f0aedd..0004c134a 100644
      }
  
 diff --git a/src/main/java/net/minecraft/server/EntityTNTPrimed.java b/src/main/java/net/minecraft/server/EntityTNTPrimed.java
-index 2c28633c4..e5170b4e6 100644
+index 7f4b68dcc..7a8670323 100644
 --- a/src/main/java/net/minecraft/server/EntityTNTPrimed.java
 +++ b/src/main/java/net/minecraft/server/EntityTNTPrimed.java
-@@ -147,4 +147,49 @@ public class EntityTNTPrimed extends Entity {
+@@ -146,4 +146,49 @@ public class EntityTNTPrimed extends Entity {
      public int getFuseTicks() {
          return this.c;
      }
@@ -115,5 +115,5 @@ index 2c28633c4..e5170b4e6 100644
 +    // Paper end
  }
 -- 
-2.20.1
+2.21.0
 

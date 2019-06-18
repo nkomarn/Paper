@@ -1,4 +1,4 @@
-From 03de4ff3ffc69cd1597f223ab8154466131f3283 Mon Sep 17 00:00:00 2001
+From 930e3600cd6fdda939c4c6a0906af9d294b20f0f Mon Sep 17 00:00:00 2001
 From: Phoenix616 <mail@moep.tv>
 Date: Tue, 18 Sep 2018 23:50:10 +0100
 Subject: [PATCH] PreSpawnerSpawnEvent
@@ -10,10 +10,10 @@ spawners.
 
 diff --git a/src/main/java/com/destroystokyo/paper/event/entity/PreSpawnerSpawnEvent.java b/src/main/java/com/destroystokyo/paper/event/entity/PreSpawnerSpawnEvent.java
 new file mode 100644
-index 00000000..d7221210
+index 00000000..48cff063
 --- /dev/null
 +++ b/src/main/java/com/destroystokyo/paper/event/entity/PreSpawnerSpawnEvent.java
-@@ -0,0 +1,27 @@
+@@ -0,0 +1,29 @@
 +package com.destroystokyo.paper.event.entity;
 +
 +
@@ -21,6 +21,7 @@ index 00000000..d7221210
 +import org.bukkit.Location;
 +import org.bukkit.entity.EntityType;
 +import org.bukkit.event.entity.CreatureSpawnEvent;
++import org.jetbrains.annotations.NotNull;
 +
 +/**
 + * Called before an entity is spawned into a world by a spawner.
@@ -30,17 +31,18 @@ index 00000000..d7221210
 + */
 +
 +public class PreSpawnerSpawnEvent extends PreCreatureSpawnEvent {
-+    private final Location spawnerLocation;
++    @NotNull private final Location spawnerLocation;
 +
-+    public PreSpawnerSpawnEvent(Location location, EntityType type, Location spawnerLocation) {
++    public PreSpawnerSpawnEvent(@NotNull Location location, @NotNull EntityType type, @NotNull Location spawnerLocation) {
 +        super(location, type, CreatureSpawnEvent.SpawnReason.SPAWNER);
 +        this.spawnerLocation = Preconditions.checkNotNull(spawnerLocation, "Spawner location may not be null");
 +    }
 +
++    @NotNull
 +    public Location getSpawnerLocation() {
 +        return spawnerLocation;
 +    }
 +}
 -- 
-2.20.1
+2.17.1
 

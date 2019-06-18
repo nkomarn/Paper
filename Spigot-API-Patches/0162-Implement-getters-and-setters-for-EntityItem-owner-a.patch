@@ -1,4 +1,4 @@
-From 2c380e9b76d24bea7deef42af4e95bcf6e3fec2a Mon Sep 17 00:00:00 2001
+From ae5ce884e6e5bee712aeffd645155caeb706448c Mon Sep 17 00:00:00 2001
 From: BillyGalbreath <Blake.Galbreath@GMail.com>
 Date: Sat, 6 Oct 2018 20:54:13 -0500
 Subject: [PATCH] Implement getters and setters for EntityItem owner and
@@ -6,22 +6,21 @@ Subject: [PATCH] Implement getters and setters for EntityItem owner and
 
 
 diff --git a/src/main/java/org/bukkit/entity/Item.java b/src/main/java/org/bukkit/entity/Item.java
-index 2e98e4f9..8049b36c 100644
+index cb9e9f36..a15f70ff 100644
 --- a/src/main/java/org/bukkit/entity/Item.java
 +++ b/src/main/java/org/bukkit/entity/Item.java
-@@ -2,6 +2,11 @@ package org.bukkit.entity;
- 
- import org.bukkit.inventory.ItemStack;
+@@ -4,6 +4,10 @@ import org.bukkit.inventory.ItemStack;
+ import org.jetbrains.annotations.NotNull;
+ import org.jetbrains.annotations.Nullable;
  
 +// Paper start
-+import javax.annotation.Nullable;
 +import java.util.UUID;
 +// Paper end
 +
  /**
-  * Represents an Item.
+  * Represents a dropped item.
   */
-@@ -49,5 +54,35 @@ public interface Item extends Entity {
+@@ -52,5 +56,35 @@ public interface Item extends Entity {
       * @param canMobPickup True to allow non-player entity pickup
       */
      public void setCanMobPickup(boolean canMobPickup);
@@ -58,5 +57,5 @@ index 2e98e4f9..8049b36c 100644
      // Paper end
  }
 -- 
-2.20.1
+2.17.1
 

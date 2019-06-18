@@ -1,4 +1,4 @@
-From 794b677388806e472929c34cf95a29abd4a35d74 Mon Sep 17 00:00:00 2001
+From 3ab046e2a34ea4d6e6d88080954337985c19e1ca Mon Sep 17 00:00:00 2001
 From: Aikar <aikar@aikar.co>
 Date: Sun, 1 May 2016 21:19:14 -0400
 Subject: [PATCH] LootTable API & Replenishable Lootables Feature
@@ -11,10 +11,10 @@ This feature is good for long term worlds so that newer players
 do not suffer with "Every chest has been looted"
 
 diff --git a/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java b/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
-index 7c7d5595a..00f0451ef 100644
+index 52a6ff855..720b87a5e 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
-@@ -270,4 +270,26 @@ public class PaperWorldConfig {
+@@ -279,4 +279,26 @@ public class PaperWorldConfig {
          this.frostedIceDelayMax = this.getInt("frosted-ice.delay.max", this.frostedIceDelayMax);
          log("Frosted Ice: " + (this.frostedIceEnabled ? "enabled" : "disabled") + " / delay: min=" + this.frostedIceDelayMin + ", max=" + this.frostedIceDelayMax);
      }
@@ -193,7 +193,7 @@ index 000000000..856843fc9
 +}
 diff --git a/src/main/java/com/destroystokyo/paper/loottable/PaperLootableInventoryData.java b/src/main/java/com/destroystokyo/paper/loottable/PaperLootableInventoryData.java
 new file mode 100644
-index 000000000..6e17af86a
+index 000000000..b5401eaf9
 --- /dev/null
 +++ b/src/main/java/com/destroystokyo/paper/loottable/PaperLootableInventoryData.java
 @@ -0,0 +1,179 @@
@@ -246,8 +246,8 @@ index 000000000..6e17af86a
 +            return false;
 +        }
 +
-+        // ALWAYS process the first fill
-+        if (this.lastFill == -1) {
++        // ALWAYS process the first fill or if the feature is disabled
++        if (this.lastFill == -1 || !this.lootable.getNMSWorld().paperConfig.autoReplenishLootables) {
 +            return true;
 +        }
 +
@@ -520,7 +520,7 @@ index 000000000..d50410532
 +    }
 +}
 diff --git a/src/main/java/net/minecraft/server/Entity.java b/src/main/java/net/minecraft/server/Entity.java
-index f7a7ba412..b6356966a 100644
+index 01d88ce66..6c7043023 100644
 --- a/src/main/java/net/minecraft/server/Entity.java
 +++ b/src/main/java/net/minecraft/server/Entity.java
 @@ -67,6 +67,7 @@ public abstract class Entity implements INamableTileEntity, ICommandListener, Ke
@@ -757,5 +757,5 @@ index f29365c94..1937f7b9a 100644
  
      public CraftMinecartHopper(CraftServer server, EntityMinecartHopper entity) {
 -- 
-2.20.1
+2.21.0
 

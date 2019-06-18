@@ -1,4 +1,4 @@
-From 6ae47c32adde3d935976cbc9b200e1e068c6ea0a Mon Sep 17 00:00:00 2001
+From 76f17072927f08a5f8157937ae7546aee879754b Mon Sep 17 00:00:00 2001
 From: Byteflux <byte@byteflux.net>
 Date: Wed, 2 Mar 2016 11:59:48 -0600
 Subject: [PATCH] Optimize explosions
@@ -10,10 +10,10 @@ This patch adds a per-tick cache that is used for storing and retrieving
 an entity's exposure during an explosion.
 
 diff --git a/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java b/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
-index 5aee23dce..2ec3d9355 100644
+index 012182378..a39451c69 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
-@@ -144,4 +144,10 @@ public class PaperWorldConfig {
+@@ -153,4 +153,10 @@ public class PaperWorldConfig {
          disableEndCredits = getBoolean("game-mechanics.disable-end-credits", false);
          log("End credits disabled: " + disableEndCredits);
      }
@@ -124,10 +124,10 @@ index c4db6367e..3e44b2d54 100644
 +    // Paper end
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index f547a6ad7..7a2f128d3 100644
+index 00f1c36e9..f488c37f7 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1054,6 +1054,7 @@ public abstract class MinecraftServer implements IAsyncTaskHandler, IMojangStati
+@@ -1055,6 +1055,7 @@ public abstract class MinecraftServer implements IAsyncTaskHandler, IMojangStati
                  worldserver.getTracker().updatePlayers();
                  this.methodProfiler.exit();
                  this.methodProfiler.exit();
@@ -136,7 +136,7 @@ index f547a6ad7..7a2f128d3 100644
          }
  
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index bf05c47a1..ac602abc0 100644
+index f3755fcfb..20990cbfd 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
 @@ -22,6 +22,7 @@ import org.apache.logging.log4j.Logger;
@@ -147,7 +147,7 @@ index bf05c47a1..ac602abc0 100644
  import java.util.Map;
  import org.bukkit.Bukkit;
  import org.bukkit.block.BlockState;
-@@ -140,6 +141,7 @@ public abstract class World implements IEntityAccess, GeneratorAccess, IIBlockAc
+@@ -139,6 +140,7 @@ public abstract class World implements IEntityAccess, GeneratorAccess, IIBlockAc
      private org.spigotmc.TickLimiter entityLimiter;
      private org.spigotmc.TickLimiter tileLimiter;
      private int tileTickPosition;
@@ -156,5 +156,5 @@ index bf05c47a1..ac602abc0 100644
      public CraftWorld getWorld() {
          return this.world;
 -- 
-2.20.1
+2.21.0
 

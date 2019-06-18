@@ -1,4 +1,4 @@
-From f62a99088d8de9b94f645e5309a996409238f9c9 Mon Sep 17 00:00:00 2001
+From 261781b7a4ce6899433dca3cbf14ceecf88ff6d6 Mon Sep 17 00:00:00 2001
 From: Zach Brown <zach.brown@destroystokyo.com>
 Date: Wed, 6 Apr 2016 01:04:23 -0500
 Subject: [PATCH] Option to use vanilla per-world scoreboard coloring on names
@@ -12,10 +12,10 @@ for this on CB at one point but I can't find it. We may need to do this
 ourselves at some point in the future.
 
 diff --git a/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java b/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
-index 276dd98fd..973ea8bca 100644
+index 260c55016e..37cc057ab7 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
-@@ -255,4 +255,9 @@ public class PaperWorldConfig {
+@@ -264,4 +264,9 @@ public class PaperWorldConfig {
          keepLoadedRange = (short) (getInt("keep-spawn-loaded-range", Math.min(spigotConfig.viewDistance, 8)) * 16);
          log( "Keep Spawn Loaded Range: " + (keepLoadedRange/16));
      }
@@ -26,10 +26,10 @@ index 276dd98fd..973ea8bca 100644
 +    }
  }
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index f35714fa1..0ff0dff28 100644
+index 545899fc29..66aa3bde64 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
-@@ -1631,7 +1631,16 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+@@ -1611,7 +1611,16 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
                      return;
                  }
  
@@ -48,7 +48,7 @@ index f35714fa1..0ff0dff28 100644
                  if (((LazyPlayerSet) event.getRecipients()).isLazy()) {
                      for (Object recipient : minecraftServer.getPlayerList().players) {
 diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
-index 452619f2f..194149eb6 100644
+index 6e62ea90dd..5236948990 100644
 --- a/src/main/java/net/minecraft/server/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/PlayerList.java
 @@ -176,7 +176,7 @@ public abstract class PlayerList {
@@ -61,5 +61,5 @@ index 452619f2f..194149eb6 100644
          worldserver = server.getWorldServer(entityplayer.dimension);  // CraftBukkit - Update in case join event changed it
          playerconnection.a(entityplayer.locX, entityplayer.locY, entityplayer.locZ, entityplayer.yaw, entityplayer.pitch);
 -- 
-2.20.1
+2.21.0
 

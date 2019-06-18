@@ -1,4 +1,4 @@
-From 759df70cabfe26f1770dc4a86679fb3f8ad0d45d Mon Sep 17 00:00:00 2001
+From 00c1a50483d196c47548593f019bdd92e1068652 Mon Sep 17 00:00:00 2001
 From: Aikar <aikar@aikar.co>
 Date: Sat, 13 Sep 2014 23:14:43 -0400
 Subject: [PATCH] Configurable Keep Spawn Loaded range per world
@@ -6,10 +6,10 @@ Subject: [PATCH] Configurable Keep Spawn Loaded range per world
 This lets you disable it for some worlds and lower it for others.
 
 diff --git a/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java b/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
-index 058cd8cc8..276dd98fd 100644
+index 6b74f810a..260c55016 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperWorldConfig.java
-@@ -249,4 +249,10 @@ public class PaperWorldConfig {
+@@ -258,4 +258,10 @@ public class PaperWorldConfig {
          grassUpdateRate = Math.max(0, getInt("grass-spread-tick-rate", grassUpdateRate));
          log("Grass Spread Tick Rate: " + grassUpdateRate);
      }
@@ -21,10 +21,10 @@ index 058cd8cc8..276dd98fd 100644
 +    }
  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 7a2f128d3..c21ebd466 100644
+index ee45d3705..01c5d3c57 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -485,13 +485,21 @@ public abstract class MinecraftServer implements IAsyncTaskHandler, IMojangStati
+@@ -486,13 +486,21 @@ public abstract class MinecraftServer implements IAsyncTaskHandler, IMojangStati
              List<ChunkCoordIntPair> list = Lists.newArrayList();
              Set<ChunkCoordIntPair> set = Sets.newConcurrentHashSet();
  
@@ -48,7 +48,7 @@ index 7a2f128d3..c21ebd466 100644
                  });
  
                  while (!completablefuture.isDone()) {
-@@ -506,11 +514,11 @@ public abstract class MinecraftServer implements IAsyncTaskHandler, IMojangStati
+@@ -507,11 +515,11 @@ public abstract class MinecraftServer implements IAsyncTaskHandler, IMojangStati
  
                          throw new RuntimeException(executionexception.getCause());
                      } catch (TimeoutException timeoutexception) {
@@ -63,10 +63,10 @@ index 7a2f128d3..c21ebd466 100644
          }
  
 diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
-index 907681cdf..5aea44cd8 100644
+index 98f98c35e..dbb00434f 100644
 --- a/src/main/java/net/minecraft/server/World.java
 +++ b/src/main/java/net/minecraft/server/World.java
-@@ -2847,8 +2847,9 @@ public abstract class World implements IEntityAccess, GeneratorAccess, IIBlockAc
+@@ -2852,8 +2852,9 @@ public abstract class World implements IEntityAccess, GeneratorAccess, IIBlockAc
          int k = i * 16 + 8 - blockposition.getX();
          int l = j * 16 + 8 - blockposition.getZ();
          boolean flag = true;
@@ -78,10 +78,10 @@ index 907681cdf..5aea44cd8 100644
  
      public LongSet ag() {
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index acd54067e..c655d51ac 100644
+index 5e821b84d..b0ae0365e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1004,7 +1004,7 @@ public final class CraftServer implements Server {
+@@ -1007,7 +1007,7 @@ public final class CraftServer implements Server {
          System.out.println("Preparing start region for level " + (console.worldServer.size() - 1) + " (Seed: " + internal.getSeed() + ")");
  
          if (internal.getWorld().getKeepSpawnInMemory()) {
@@ -91,7 +91,7 @@ index acd54067e..c655d51ac 100644
              for (int j = -short1; j <= short1; j += 16) {
                  for (int k = -short1; k <= short1; k += 16) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index f118d382c..274e8626d 100644
+index 262c3f910..a8c7e7931 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 @@ -1419,8 +1419,9 @@ public class CraftWorld implements World {
@@ -107,5 +107,5 @@ index f118d382c..274e8626d 100644
                      loadChunk(chunkCoordX + x, chunkCoordZ + z);
                  } else {
 -- 
-2.20.1
+2.21.0
 

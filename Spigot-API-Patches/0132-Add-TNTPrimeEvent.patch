@@ -1,4 +1,4 @@
-From 158e880fb788c001e8f0488860132577c9b0bdc9 Mon Sep 17 00:00:00 2001
+From 45165a47c5ca5524f6990174947c219226c1aa90 Mon Sep 17 00:00:00 2001
 From: Mark Vainomaa <mikroskeem@mikroskeem.eu>
 Date: Sun, 15 Jul 2018 22:17:55 +0300
 Subject: [PATCH] Add TNTPrimeEvent
@@ -6,10 +6,10 @@ Subject: [PATCH] Add TNTPrimeEvent
 
 diff --git a/src/main/java/com/destroystokyo/paper/event/block/TNTPrimeEvent.java b/src/main/java/com/destroystokyo/paper/event/block/TNTPrimeEvent.java
 new file mode 100644
-index 00000000..2ae8826b
+index 000000000..73dabb82c
 --- /dev/null
 +++ b/src/main/java/com/destroystokyo/paper/event/block/TNTPrimeEvent.java
-@@ -0,0 +1,108 @@
+@@ -0,0 +1,114 @@
 +package com.destroystokyo.paper.event.block;
 +
 +import org.bukkit.block.Block;
@@ -17,6 +17,8 @@ index 00000000..2ae8826b
 +import org.bukkit.event.Cancellable;
 +import org.bukkit.event.HandlerList;
 +import org.bukkit.event.block.BlockEvent;
++import org.jetbrains.annotations.NotNull;
++import org.jetbrains.annotations.Nullable;
 +
 +/**
 + * Called when TNT block is about to turn into {@link org.bukkit.entity.TNTPrimed}
@@ -29,10 +31,10 @@ index 00000000..2ae8826b
 +public class TNTPrimeEvent extends BlockEvent implements Cancellable {
 +    private static final HandlerList handlers = new HandlerList();
 +    private boolean cancelled;
-+    private PrimeReason reason;
-+    private Entity primerEntity;
++    @NotNull private PrimeReason reason;
++    @Nullable private Entity primerEntity;
 +
-+    public TNTPrimeEvent(Block theBlock, PrimeReason reason, Entity primerEntity) {
++    public TNTPrimeEvent(@NotNull Block theBlock, @NotNull PrimeReason reason, @Nullable Entity primerEntity) {
 +        super(theBlock);
 +        this.reason = reason;
 +        this.primerEntity = primerEntity;
@@ -43,6 +45,7 @@ index 00000000..2ae8826b
 +     *
 +     * @return Prime reason
 +     */
++    @NotNull
 +    public PrimeReason getReason() {
 +        return this.reason;
 +    }
@@ -56,6 +59,7 @@ index 00000000..2ae8826b
 +     *
 +     * @return The {@link Entity} who primed the TNT
 +     */
++    @Nullable
 +    public Entity getPrimerEntity() {
 +        return this.primerEntity;
 +    }
@@ -80,11 +84,13 @@ index 00000000..2ae8826b
 +        this.cancelled = cancel;
 +    }
 +
++    @Nullable
 +    @Override
 +    public HandlerList getHandlers() {
 +        return handlers;
 +    }
 +
++    @Nullable
 +    public static HandlerList getHandlerList() {
 +        return handlers;
 +    }
@@ -119,5 +125,5 @@ index 00000000..2ae8826b
 +    }
 +}
 -- 
-2.20.1
+2.21.0
 
