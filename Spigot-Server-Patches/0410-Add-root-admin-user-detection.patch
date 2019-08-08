@@ -1,4 +1,4 @@
-From c0c3a77c8dc847f9388f80f1d8eb00d33cc8ac86 Mon Sep 17 00:00:00 2001
+From 9ede8411afc9a5f84436f9aea86e8447ea24d72e Mon Sep 17 00:00:00 2001
 From: egg82 <eggys82@gmail.com>
 Date: Thu, 8 Aug 2019 14:12:48 -0600
 Subject: [PATCH] Add root/admin user detection
@@ -51,7 +51,7 @@ index 000000000..6364ea403
 +    public static boolean userIsRootOrAdmin() { return runningAsRootOrAdmin; }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/Main.java b/src/main/java/org/bukkit/craftbukkit/Main.java
-index 1fa81904d..9dd236054 100644
+index 1fa81904d..3846a2155 100644
 --- a/src/main/java/org/bukkit/craftbukkit/Main.java
 +++ b/src/main/java/org/bukkit/craftbukkit/Main.java
 @@ -1,5 +1,6 @@
@@ -61,15 +61,7 @@ index 1fa81904d..9dd236054 100644
  import java.io.File;
  import java.io.IOException;
  import java.text.SimpleDateFormat;
-@@ -7,7 +8,6 @@ import java.util.Arrays;
- import java.util.Calendar;
- import java.util.Date;
- import java.util.List;
--import java.util.concurrent.TimeUnit;
- import java.util.logging.Level;
- import java.util.logging.Logger;
- import joptsimple.OptionParser;
-@@ -211,6 +211,16 @@ public class Main {
+@@ -211,6 +212,17 @@ public class Main {
                      System.setProperty(TerminalConsoleAppender.JLINE_OVERRIDE_PROPERTY, "false"); // Paper
                  }
  
@@ -79,7 +71,8 @@ index 1fa81904d..9dd236054 100644
 +                    System.err.println("YOU ARE RUNNING AS AN ADMINISTRATIVE OR ROOT USER. THIS IS NOT ADVISED.");
 +                    System.err.println("YOU ARE OPENING YOURSELF UP TO POTENTIAL RISKS WHEN DOING THIS.");
 +                    System.err.println("MALWARE, BAD PLUGINS, AND ATTACKERS WILL HAVE COMPLETE ACCESS AND CONTROL OF YOUR MACHINE.");
-+                    System.err.println("****************************" + System.lineSeparator());
++                    System.err.println("****************************");
++                    System.err.println();
 +                }
 +                // Paper end
 +
