@@ -1,4 +1,4 @@
-From 9ede8411afc9a5f84436f9aea86e8447ea24d72e Mon Sep 17 00:00:00 2001
+From 0827093931ef3b9979474d4cae4ceead71156656 Mon Sep 17 00:00:00 2001
 From: egg82 <eggys82@gmail.com>
 Date: Thu, 8 Aug 2019 14:12:48 -0600
 Subject: [PATCH] Add root/admin user detection
@@ -10,10 +10,10 @@ Hopefully this helps mitigate some potential damage to servers, even if it is ju
 
 diff --git a/src/main/java/com/destroystokyo/paper/util/ServerEnvironment.java b/src/main/java/com/destroystokyo/paper/util/ServerEnvironment.java
 new file mode 100644
-index 000000000..6364ea403
+index 000000000..76bfae177
 --- /dev/null
 +++ b/src/main/java/com/destroystokyo/paper/util/ServerEnvironment.java
-@@ -0,0 +1,36 @@
+@@ -0,0 +1,38 @@
 +package com.destroystokyo.paper.util;
 +
 +import java.io.OutputStream;
@@ -27,25 +27,27 @@ index 000000000..6364ea403
 +        // https://stackoverflow.com/a/23538961
 +        Preferences prefs = Preferences.systemRoot();
 +        PrintStream err = System.err;
-+        synchronized (err) { // Synchronized to prevent swapping back to "err" before printing the warning from the try/catch to console
-+            System.setErr(new PrintStream(new OutputStream() {
-+                @Override
-+                public void write(int b) { }
-+            }));
++        PrintStream emptyStream = new PrintStream(new OutputStream() {
++            @Override
++            public void write(int b) { }
++        });
 +
-+            boolean retVal;
-+            try {
-+                prefs.put("foo", "bar"); // SecurityException
-+                prefs.remove("foo");
-+                prefs.flush(); // BackingStoreException
-+                retVal = true;
-+            } catch (Exception ignored) { // Windows = SecurityException, Linux = BackingStoreException
-+                retVal = false;
-+            }
-+            runningAsRootOrAdmin = retVal;
++        System.err.flush();
++        System.setErr(emptyStream);
 +
-+            System.setErr(err);
++        boolean retVal;
++        try {
++            prefs.put("papermc.priv_test", "This is a test performed by the Paper Minecraft server software."); // SecurityException
++            prefs.remove("papermc.priv_test");
++            prefs.flush(); // BackingStoreException
++            retVal = true;
++        } catch (Exception ignored) { // Windows = SecurityException, Linux = BackingStoreException
++            retVal = false;
 +        }
++        runningAsRootOrAdmin = retVal;
++
++        System.err.flush();
++        System.setErr(err);
 +    }
 +
 +    public static boolean userIsRootOrAdmin() { return runningAsRootOrAdmin; }
